@@ -3,12 +3,12 @@ title: "Codelab: Build an Agent-to-Agent (A2A) and Multi-MCP Mesh on Cloud Run w
 published: false
 description: "Step by step Google Cloud Codelab for deploying open-weights Gemma 4 on Cloud Run NVIDIA L4 GPUs and orchestrating a multi-MCP and Agent-to-Agent (A2A) remediation mesh across Cloud Spanner Graph (ISO GQL), AlloyDB pgvector (ScaNN), and GitHub MCP using Google Agent Development Kit (ADK)."
 tags: googlecloud, ai, mcp, opensource
-cover_image: https://raw.githubusercontent.com/RobinaMirbahar/streamforge-event-adk/main/articles/a2a-mcp-mesh-codelab/cover.becf9a0f.jpg
+cover_image: https://raw.githubusercontent.com/RobinaMirbahar/a2a-mcp-mesh-cloudrun/main/assets/cover.becf9a0f.jpg
 ---
 
 This Codelab provides a step by step deployment and architectural guide for building an **Agent-to-Agent (A2A) and Multi-MCP Mesh** on [Google Cloud Run](https://cloud.google.com/run/docs) powered by [open-weights Gemma 4 (`google/gemma-4-27b-it`)](https://cloud.google.com/vertex-ai/generative-ai/docs/open-models/use-gemma), the [Google Agent Development Kit (ADK)](https://google.github.io/adk-docs/), [Cloud Spanner Graph](https://cloud.google.com/spanner/docs/graph/overview), [AlloyDB for PostgreSQL (`pgvector` + `ScaNN`)](https://cloud.google.com/alloydb/docs/ai/work-with-embeddings), and the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction).
 
-Repository: [github.com/RobinaMirbahar/streamforge-event-adk](https://github.com/RobinaMirbahar/streamforge-event-adk)
+Repository: [github.com/RobinaMirbahar/a2a-mcp-mesh-cloudrun](https://github.com/RobinaMirbahar/a2a-mcp-mesh-cloudrun)
 
 ---
 
@@ -24,7 +24,7 @@ Connecting a single agent to a single MCP server solves isolated data lookups. E
 | **Orchestration Topology** | Single `LlmAgent` | **Google ADK Hybrid Graph:** `ParallelAgent` (3-way fan-out) -> `LoopAgent` (safety policy gate) -> `SequentialAgent` (Pydantic manifest) |
 | **Network & Auth Perimeter** | Public or single-hop IAM | **Direct VPC Egress** (`private-ranges-only`) + **Least-Privilege OIDC Invokers** (`roles/run.invoker`) |
 
-![Figure 1: Cloud Run A2A and Multi-MCP Mesh Architecture with Gemma 4 and Google ADK](https://raw.githubusercontent.com/RobinaMirbahar/streamforge-event-adk/main/articles/a2a-mcp-mesh-codelab/a2a_mcp_mesh_end_to_end_arch.jpg)
+![Figure 1: Cloud Run A2A and Multi-MCP Mesh Architecture with Gemma 4 and Google ADK](https://raw.githubusercontent.com/RobinaMirbahar/a2a-mcp-mesh-cloudrun/main/assets/a2a_mcp_mesh_end_to_end_arch.jpg)
 
 ---
 
@@ -35,7 +35,7 @@ Modern agentic systems on Google Cloud separate deterministic tool execution fro
 1. **Vertical Integration via Model Context Protocol (`MCPToolset`):** Connects an individual [Google ADK `LlmAgent`](https://google.github.io/adk-docs/) to structured databases and APIs over Server-Sent Events (`SSE`) or `stdio`. In this Codelab, two dedicated Python `FastMCP` servers expose `query_service_blast_radius_gql` (backed by **Cloud Spanner Graph**) and `search_alloydb_runbooks_scann` (backed by **AlloyDB `pgvector`**).
 2. **Horizontal Integration via Agent-to-Agent (`A2A`) Protocol:** Enables a root orchestrator agent to discover independent specialist agents hosted by separate teams via their `GET /.well-known/agent.json` (`A2AAgentCard`) endpoint and delegate complex sub-tasks over JSON-RPC `2.0` (`POST /tasks/send`) without sharing internal prompts or private GitHub tokens.
 
-![Figure 2: Combining MCPToolset Vertical Tool Access with A2A Horizontal Agent Delegation](https://raw.githubusercontent.com/RobinaMirbahar/streamforge-event-adk/main/articles/a2a-mcp-mesh-codelab/a2a_protocol_mcp_toolset_flow.jpg)
+![Figure 2: Combining MCPToolset Vertical Tool Access with A2A Horizontal Agent Delegation](https://raw.githubusercontent.com/RobinaMirbahar/a2a-mcp-mesh-cloudrun/main/assets/a2a_protocol_mcp_toolset_flow.jpg)
 
 ---
 
@@ -315,7 +315,7 @@ def handle_a2a_task_send(payload: Dict[str, Any]) -> Dict[str, Any]:
             "task_status": "COMPLETED",
             "delegated_agent": AGENT_CARD.name,
             "github_mcp_tool_invoked": "create_pull_request",
-            "github_rollback_pr_url": "https://github.com/RobinaMirbahar/streamforge-event-adk/commits/main",
+            "github_rollback_pr_url": "https://github.com/RobinaMirbahar/a2a-mcp-mesh-cloudrun/commits/main",
             "reverted_commit_sha": failing_sha,
             "target_service": target_service,
             "proposed_rollout_strategy": "IMMEDIATE_100_PERCENT_CUTOVER",
@@ -424,7 +424,7 @@ Model: google/gemma-4-27b-it (Cloud Run L4 GPU + GCS FUSE) | Protocol: A2A + Fas
 [STEP 1] Executing ADK ParallelAgent (ConcurrentMultiMCPAndA2AFanOut)...
   * Branch 1 (Spanner Graph MCP)  : 3-hop GQL returned 3 downstream services, 42 tenants ($184,000/hr SLA risk) in 11.4 ms
   * Branch 2 (AlloyDB Vector MCP) : ScaNN index matched RB-SPANNER-GRPC-POOL-204 (similarity=0.964) in 6.8 ms
-  * Branch 3 (Remote A2A Agent)   : Discovered GitHubRollbackRemediationAgent via /.well-known/agent.json -> PR https://github.com/RobinaMirbahar/streamforge-event-adk/commits/main
+  * Branch 3 (Remote A2A Agent)   : Discovered GitHubRollbackRemediationAgent via /.well-known/agent.json -> PR https://github.com/RobinaMirbahar/a2a-mcp-mesh-cloudrun/commits/main
 
 [STEP 2] Executing ADK LoopAgent (MeshRemediationSafetyLoop)...
 [
@@ -459,7 +459,7 @@ Model: google/gemma-4-27b-it (Cloud Run L4 GPU + GCS FUSE) | Protocol: A2A + Fas
   ],
   "matched_runbook_id": "RB-SPANNER-GRPC-POOL-204",
   "a2a_delegated_agent": "GitHubRollbackRemediationAgent",
-  "github_rollback_pr_url": "https://github.com/RobinaMirbahar/streamforge-event-adk/commits/main",
+  "github_rollback_pr_url": "https://github.com/RobinaMirbahar/a2a-mcp-mesh-cloudrun/commits/main",
   "rollout_strategy": "CANARY_10_50_100_TRAFFIC_SPLIT",
   "loop_iterations_completed": 2,
   "final_safety_score": 1.0,
