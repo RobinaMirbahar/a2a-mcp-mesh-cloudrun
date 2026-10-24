@@ -1,5 +1,8 @@
 # Agent-to-Agent (A2A) & Multi-MCP Mesh on Cloud Run with Gemma 4, Google ADK, Spanner Graph & AlloyDB
 
+[![M8ven Score](https://m8ven.ai/badge/mcp/robinamirbahar/a2a-mcp-mesh-cloudrun)](https://m8ven.ai/mcp/robinamirbahar/a2a-mcp-mesh-cloudrun?s=readme)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
 ![Cover](assets/cover.002d0eee.jpg)
 
 This Codelab provides a step by step deployment and architectural guide for building an **Agent-to-Agent (A2A) and Multi-MCP Mesh** on [Google Cloud Run](https://cloud.google.com/run/docs) powered by [open-weights Gemma 4 (`google/gemma-4-27b-it`)](https://cloud.google.com/vertex-ai/generative-ai/docs/open-models/use-gemma), the [Google Agent Development Kit (ADK)](https://google.github.io/adk-docs/), [Cloud Spanner Graph](https://cloud.google.com/spanner/docs/graph/overview), [AlloyDB for PostgreSQL (`pgvector` + `ScaNN`)](https://cloud.google.com/alloydb/docs/ai/work-with-embeddings), and the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction).

@@ -18,7 +18,14 @@ LIMIT 1;
 """
 
 
-@mcp.tool()
+@mcp.tool(
+    annotations={
+        "readOnlyHint": True,
+        "destructiveHint": False,
+        "idempotentHint": True,
+        "openWorldHint": False,
+    }
+)
 def search_alloydb_runbooks_scann(
     error_signature: str,
     service_tier: str = "TIER_1_FINANCIAL",

@@ -17,7 +17,14 @@ RETURN root.last_commit_sha AS failing_commit_sha,
 """
 
 
-@mcp.tool()
+@mcp.tool(
+    annotations={
+        "readOnlyHint": True,
+        "destructiveHint": False,
+        "idempotentHint": True,
+        "openWorldHint": False,
+    }
+)
 def query_service_blast_radius_gql(
     service_id: str,
     max_hops: int = 3,
