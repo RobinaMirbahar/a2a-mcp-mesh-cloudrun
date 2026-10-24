@@ -565,5 +565,5 @@ The strategy for orchestrating an Agent-to-Agent (A2A) and Multi-MCP Mesh with G
 If this project is helpful to your work:
 * **Star this Repository:** [**Star `RobinaMirbahar/a2a-mcp-mesh-cloudrun` on GitHub**](https://github.com/RobinaMirbahar/a2a-mcp-mesh-cloudrun) to bookmark it and help others discover it.
 * **Fork & Customize:** [**Fork `RobinaMirbahar/a2a-mcp-mesh-cloudrun`**](https://github.com/RobinaMirbahar/a2a-mcp-mesh-cloudrun/fork) to build and experiment with your own workflows.
-* **Sponsor on GitHub:** [**Sponsor `@RobinaMirbahar` on GitHub Sponsors (`github.com/sponsors/RobinaMirbahar`)**](https://github.com/sponsors/RobinaMirbahar) to support open-source AI, Google Cloud, and Gemini engineering projects!
+* **Sponsor on GitHub:** [**Sponsor `@RobinaMirbahar` on GitHub Sponsors (`github.com/sponsors/RobinaMirbahar`)**](https://github.com/sponsors/RobinaMirbahar) to support future open-source [**Google (`@google`)**](https://github.com/google), [**Google Gemini (`@google-gemini`)**](https://github.com/google-gemini), [**Google DeepMind (`@google-deepmind`)**](https://github.com/google-deepmind), and [**Google Cloud (`@GoogleCloudPlatform`)**](https://github.com/GoogleCloudPlatform) cookbooks!
 
