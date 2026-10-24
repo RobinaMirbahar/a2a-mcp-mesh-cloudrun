@@ -1,3 +1,8 @@
+import os
+import sys
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
 from a2a_mcp_mesh.mcp_servers.alloydb_vector_mcp import search_alloydb_runbooks_scann
 from a2a_mcp_mesh.mcp_servers.spanner_graph_mcp import query_service_blast_radius_gql
 
