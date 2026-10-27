@@ -5,6 +5,48 @@
 
 ![Cover](assets/cover.002d0eee.jpg)
 
+> **Author & Architect:** [Robina Mirbahar](https://github.com/RobinaMirbahar) (Google Developer Expert in Cloud & AI)  
+> **Focus:** Production Multi-Agent Mesh Combining Google ADK, A2A Protocol, MCP Tool Servers, Gemma 4, Cloud Spanner Graph (GQL) & AlloyDB pgvector
+
+---
+
+## 🎯 Why I Built Agent-to-Agent (A2A) & Multi-MCP Mesh on Google Cloud Run (Engineering Purpose & Real-World Value)
+
+### 1. 🕸️ Unifying Agent-to-Agent (A2A) Horizontal Delegation with Vertical MCP Tooling
+Engineers often ask how Google's A2A protocol and the Model Context Protocol (MCP) fit together. I built this reference architecture to demonstrate **A2A for horizontal agent-to-agent task delegation** paired with **MCP for vertical database and API tool execution**.
+
+### 2. 🗄️ Hybrid Graph + Vector Grounding (Spanner Graph GQL + AlloyDB `pgvector`)
+Instead of relying on flat vector search alone, my mesh combines **Cloud Spanner Graph (ISO GQL)** for multi-hop dependency traversal with **AlloyDB `pgvector`** for semantic document retrieval.
+
+### 3. 🔐 Zero-Trust Cloud Run Service-to-Service IAM
+Every A2A agent card discovery and MCP call is authenticated across Google Cloud Run services.
+
+---
+
+## 🏗️ System Architecture
+
+```mermaid
+flowchart TD
+    subgraph Orchestrator ["1. Host Coordinator Agent (Cloud Run)"]
+        H_ADK["Google ADK Root Orchestrator"]
+        H_A2A["A2A Client (/.well-known/agent.json Discovery)"]
+    end
+    subgraph RemoteAgents ["2. Remote A2A Specialist Agents (Horizontal)"]
+        R_Graph["Topology & Blast-Radius A2A Agent"]
+        R_Knowledge["Semantic Runbook A2A Agent"]
+    end
+    subgraph MCPServers ["3. MCP Data & Tool Servers (Vertical)"]
+        M_Spanner["MCP Server: Cloud Spanner Graph (ISO GQL)"]
+        M_Alloy["MCP Server: AlloyDB pgvector Semantic Search"]
+    end
+    H_ADK --> H_A2A
+    H_A2A <-->|A2A JSON-RPC / SSE| R_Graph & R_Knowledge
+    R_Graph <-->|MCP Tool Calls| M_Spanner
+    R_Knowledge <-->|MCP Tool Calls| M_Alloy
+```
+
+---
+
 This Codelab provides a step by step deployment and architectural guide for building an **Agent-to-Agent (A2A) and Multi-MCP Mesh** on [Google Cloud Run](https://cloud.google.com/run/docs) powered by [open-weights Gemma 4 (`google/gemma-4-27b-it`)](https://cloud.google.com/vertex-ai/generative-ai/docs/open-models/use-gemma), the [Google Agent Development Kit (ADK)](https://google.github.io/adk-docs/), [Cloud Spanner Graph](https://cloud.google.com/spanner/docs/graph/overview), [AlloyDB for PostgreSQL (`pgvector` + `ScaNN`)](https://cloud.google.com/alloydb/docs/ai/work-with-embeddings), and the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction).
 
 Repository: [github.com/RobinaMirbahar/a2a-mcp-mesh-cloudrun](https://github.com/RobinaMirbahar/a2a-mcp-mesh-cloudrun)
