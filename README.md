@@ -47,7 +47,7 @@ flowchart TD
 
 ---
 
-This Codelab provides a step by step deployment and architectural guide for building an **Agent-to-Agent (A2A) and Multi-MCP Mesh** on [Google Cloud Run](https://cloud.google.com/run/docs) powered by [open-weights Gemma 4 (`google/gemma-4-27b-it`)](https://cloud.google.com/vertex-ai/generative-ai/docs/open-models/use-gemma), the [Google Agent Development Kit (ADK)](https://google.github.io/adk-docs/), [Cloud Spanner Graph](https://cloud.google.com/spanner/docs/graph/overview), [AlloyDB for PostgreSQL (`pgvector` + `ScaNN`)](https://cloud.google.com/alloydb/docs/ai/work-with-embeddings), and the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction).
+This Codelab provides a step by step deployment and architectural guide for building an **Agent-to-Agent (A2A) and Multi-MCP Mesh** on [Google Cloud Run](https://cloud.google.com/run/docs?utm_campaign=deveco_gdemembers&utm_source=deveco) powered by [open-weights Gemma 4 (`google/gemma-4-27b-it`)](https://cloud.google.com/vertex-ai/generative-ai/docs/open-models/use-gemma?utm_campaign=deveco_gdemembers&utm_source=deveco), the [Google Agent Development Kit (ADK)](https://google.github.io/adk-docs/?utm_campaign=deveco_gdemembers&utm_source=deveco), [Cloud Spanner Graph](https://cloud.google.com/spanner/docs/graph/overview?utm_campaign=deveco_gdemembers&utm_source=deveco), [AlloyDB for PostgreSQL (`pgvector` + `ScaNN`)](https://cloud.google.com/alloydb/docs/ai/work-with-embeddings?utm_campaign=deveco_gdemembers&utm_source=deveco), and the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction).
 
 Repository: [github.com/RobinaMirbahar/a2a-mcp-mesh-cloudrun](https://github.com/RobinaMirbahar/a2a-mcp-mesh-cloudrun)
 
@@ -55,7 +55,7 @@ Repository: [github.com/RobinaMirbahar/a2a-mcp-mesh-cloudrun](https://github.com
 
 #### 1. Codelab Overview: What You Will Build
 
-Connecting a single agent to a single MCP server solves isolated data lookups. Enterprise incident response and platform engineering require coordinating multiple data engines and autonomous specialist agents simultaneously: traversing a service dependency graph in [Cloud Spanner Graph](https://cloud.google.com/spanner/docs/graph/overview) to quantify blast radius, retrieving verified remediation runbooks via vector similarity search in [AlloyDB for PostgreSQL](https://cloud.google.com/alloydb/docs/ai/work-with-embeddings), and delegating code rollback pull requests to a remote specialist agent over the [Agent-to-Agent (A2A) Protocol](https://google.github.io/adk-docs/).
+Connecting a single agent to a single MCP server solves isolated data lookups. Enterprise incident response and platform engineering require coordinating multiple data engines and autonomous specialist agents simultaneously: traversing a service dependency graph in [Cloud Spanner Graph](https://cloud.google.com/spanner/docs/graph/overview?utm_campaign=deveco_gdemembers&utm_source=deveco) to quantify blast radius, retrieving verified remediation runbooks via vector similarity search in [AlloyDB for PostgreSQL](https://cloud.google.com/alloydb/docs/ai/work-with-embeddings?utm_campaign=deveco_gdemembers&utm_source=deveco), and delegating code rollback pull requests to a remote specialist agent over the [Agent-to-Agent (A2A) Protocol](https://google.github.io/adk-docs/?utm_campaign=deveco_gdemembers&utm_source=deveco).
 
 | Architecture Layer | Single-Agent + Single-MCP Codelab | Multi-MCP + A2A Mesh Codelab (This Guide) |
 | --- | --- | --- |
@@ -73,7 +73,7 @@ Connecting a single agent to a single MCP server solves isolated data lookups. E
 
 Modern agentic systems on Google Cloud separate deterministic tool execution from cross-agent collaboration across two complementary open standards:
 
-1. **Vertical Integration via Model Context Protocol (`MCPToolset`):** Connects an individual [Google ADK `LlmAgent`](https://google.github.io/adk-docs/) to structured databases and APIs over Server-Sent Events (`SSE`) or `stdio`. In this Codelab, two dedicated Python `FastMCP` servers expose `query_service_blast_radius_gql` (backed by **Cloud Spanner Graph**) and `search_alloydb_runbooks_scann` (backed by **AlloyDB `pgvector`**).
+1. **Vertical Integration via Model Context Protocol (`MCPToolset`):** Connects an individual [Google ADK `LlmAgent`](https://google.github.io/adk-docs/?utm_campaign=deveco_gdemembers&utm_source=deveco) to structured databases and APIs over Server-Sent Events (`SSE`) or `stdio`. In this Codelab, two dedicated Python `FastMCP` servers expose `query_service_blast_radius_gql` (backed by **Cloud Spanner Graph**) and `search_alloydb_runbooks_scann` (backed by **AlloyDB `pgvector`**).
 2. **Horizontal Integration via Agent-to-Agent (`A2A`) Protocol:** Enables a root orchestrator agent to discover independent specialist agents hosted by separate teams via their `GET /.well-known/agent.json` (`A2AAgentCard`) endpoint and delegate complex sub-tasks over JSON-RPC `2.0` (`POST /tasks/send`) without sharing internal prompts or private GitHub tokens.
 
 ![Figure 2: Combining MCPToolset Vertical Tool Access with A2A Horizontal Agent Delegation](https://raw.githubusercontent.com/RobinaMirbahar/a2a-mcp-mesh-cloudrun/main/assets/a2a_protocol_mcp_toolset_flow.jpg)
@@ -82,10 +82,10 @@ Modern agentic systems on Google Cloud separate deterministic tool execution fro
 
 #### 3. At This Point You Should Have
 
-- A [Google Cloud project](https://cloud.google.com/resource-manager/docs/creating-managing-projects) with billing enabled and the `gcloud` CLI (`495.0.0+`) authenticated.
+- A [Google Cloud project](https://cloud.google.com/resource-manager/docs/creating-managing-projects?utm_campaign=deveco_gdemembers&utm_source=deveco) with billing enabled and the `gcloud` CLI (`495.0.0+`) authenticated.
 - Python `3.10+` (`3.11` or `3.12` recommended) and `uv` installed locally.
 - `google-adk>=1.0.0`, `mcp>=1.2.0`, `litellm`, `fastapi`, and `pydantic>=2.0.0`.
-- Regional quota for `1` `NVIDIA L4` GPU (`24 GB` GDDR6 VRAM) in `us-central1` on [Cloud Run GPUs](https://cloud.google.com/run/docs/configuring/services/gpu).
+- Regional quota for `1` `NVIDIA L4` GPU (`24 GB` GDDR6 VRAM) in `us-central1` on [Cloud Run GPUs](https://cloud.google.com/run/docs/configuring/services/gpu?utm_campaign=deveco_gdemembers&utm_source=deveco).
 
 ---
 
@@ -131,7 +131,7 @@ Creating gs://your-gcp-project-id-gemma4-weights/...
 
 #### 5. Step 2 — Deploy Open-Weights Gemma 4 on Cloud Run NVIDIA L4 GPU with vLLM
 
-Deploy `google/gemma-4-27b-it` onto a serverless [Cloud Run NVIDIA L4 GPU](https://cloud.google.com/run/docs/configuring/services/gpu) instance (`8 vCPU`, `32 GiB` system RAM, `1` `nvidia-l4` GPU) with `--no-gpu-zonal-redundancy`, `--min-instances=0`, and `--enable-auto-tool-choice` enabled on the `vLLM` OpenAI-compatible server.
+Deploy `google/gemma-4-27b-it` onto a serverless [Cloud Run NVIDIA L4 GPU](https://cloud.google.com/run/docs/configuring/services/gpu?utm_campaign=deveco_gdemembers&utm_source=deveco) instance (`8 vCPU`, `32 GiB` system RAM, `1` `nvidia-l4` GPU) with `--no-gpu-zonal-redundancy`, `--min-instances=0`, and `--enable-auto-tool-choice` enabled on the `vLLM` OpenAI-compatible server.
 
 ```bash
 gcloud run deploy gemma4-27b-vllm-service \
@@ -208,7 +208,7 @@ class IncidentMeshManifest(BaseModel):
 
 #### 7. Step 4 — Build the Cloud Spanner Graph MCP Server (`ISO GQL` Blast Radius)
 
-In `a2a_mcp_mesh/mcp_servers/spanner_graph_mcp.py`, expose an MCP tool using `FastMCP` over `SSE` that executes a 3-hop `ISO GQL` path traversal (`-[:CALLS]->{1,3}`) on [Cloud Spanner Graph](https://cloud.google.com/spanner/docs/graph/overview) to identify every downstream microservice and enterprise tenant impacted by a failing gateway commit.
+In `a2a_mcp_mesh/mcp_servers/spanner_graph_mcp.py`, expose an MCP tool using `FastMCP` over `SSE` that executes a 3-hop `ISO GQL` path traversal (`-[:CALLS]->{1,3}`) on [Cloud Spanner Graph](https://cloud.google.com/spanner/docs/graph/overview?utm_campaign=deveco_gdemembers&utm_source=deveco) to identify every downstream microservice and enterprise tenant impacted by a failing gateway commit.
 
 ```python
 from typing import Any, Dict
@@ -257,7 +257,7 @@ if __name__ == "__main__":
 
 #### 8. Step 5 — Build the AlloyDB `pgvector` + `ScaNN` Runbook MCP Server
 
-In `a2a_mcp_mesh/mcp_servers/alloydb_vector_mcp.py`, create the second `FastMCP` server that queries [AlloyDB for PostgreSQL](https://cloud.google.com/alloydb/docs/ai/work-with-embeddings) using the `alloydb_scann` index (`<=>` cosine distance operator) to fetch the highest-similarity SRE remediation runbook and its mandatory canary rollout rules.
+In `a2a_mcp_mesh/mcp_servers/alloydb_vector_mcp.py`, create the second `FastMCP` server that queries [AlloyDB for PostgreSQL](https://cloud.google.com/alloydb/docs/ai/work-with-embeddings?utm_campaign=deveco_gdemembers&utm_source=deveco) using the `alloydb_scann` index (`<=>` cosine distance operator) to fetch the highest-similarity SRE remediation runbook and its mandatory canary rollout rules.
 
 ```python
 from typing import Any, Dict
@@ -368,7 +368,7 @@ def handle_a2a_task_send(payload: Dict[str, Any]) -> Dict[str, Any]:
 
 #### 10. Step 7 — Orchestrate the Root ADK Coordinator (`ParallelAgent` + `LoopAgent`)
 
-In `a2a_mcp_mesh/coordinator_agent.py`, wire the root [Google ADK workflow](https://google.github.io/adk-docs/agents/workflow-agents/):
+In `a2a_mcp_mesh/coordinator_agent.py`, wire the root [Google ADK workflow](https://google.github.io/adk-docs/agents/workflow-agents/?utm_campaign=deveco_gdemembers&utm_source=deveco):
 - **Stage 1 (`ConcurrentMultiMCPAndA2AFanOut`):** A `ParallelAgent` that executes the Spanner Graph MCP branch (`output_key="spanner_blast_radius"`), the AlloyDB Vector MCP branch (`output_key="alloydb_runbook"`), and the A2A GitHub client branch (`output_key="a2a_remediation"`) concurrently.
 - **Stage 2 (`MeshRemediationSafetyLoop`):** A `LoopAgent` (`max_iterations=3`) that cross-checks the A2A agent's proposed rollout (`IMMEDIATE_100_PERCENT_CUTOVER`) against the Spanner Graph blast radius (`42` enterprise tenants, `$184,000/hr` SLA exposure) and AlloyDB runbook `RB-SPANNER-GRPC-POOL-204`. On Iteration `1`, it flags the violation (`safety_score = 0.68`) and enforces `CANARY_10_50_100_TRAFFIC_SPLIT`. On Iteration `2`, `safety_score` reaches `1.0` and `exit_safety_audit_loop()` sets `tool_context.actions.escalate = True`.
 - **Stage 3 (`IncidentMeshManifestPublisher`):** Emits the schema-validated `IncidentMeshManifest`.
@@ -531,14 +531,14 @@ Deployment complete: Cloud Run A2A & Multi-MCP Mesh is active in us-central1.
 
 #### 13. Official Google Cloud, Gemma 4, ADK, and MCP Documentation
 
-- [Google Agent Development Kit (ADK) Official Documentation](https://google.github.io/adk-docs/)
-- [Google ADK Workflow Agents (`SequentialAgent`, `ParallelAgent`, `LoopAgent`)](https://google.github.io/adk-docs/agents/workflow-agents/)
-- [Google ADK Model Context Protocol (`MCPToolset`) Guide](https://google.github.io/adk-docs/tools/mcp-tools/)
-- [Google Gemma Open Models Documentation](https://cloud.google.com/vertex-ai/generative-ai/docs/open-models/use-gemma)
-- [Google Cloud Run GPU Configuration Guide (`NVIDIA L4`)](https://cloud.google.com/run/docs/configuring/services/gpu)
-- [Google Cloud Spanner Graph (`ISO GQL`) Overview](https://cloud.google.com/spanner/docs/graph/overview)
-- [Google Cloud AlloyDB AI & `pgvector` `ScaNN` Index Documentation](https://cloud.google.com/alloydb/docs/ai/work-with-embeddings)
-- [Google Cloud Codelab Reference: Build and Deploy AI Agents with Gemma 4 and BigQuery MCP in Cloud Run](https://codelabs.developers.google.com/codelabs/cloud-run/cloud-run-adk-bq-mcp#0)
+- [Google Agent Development Kit (ADK) Official Documentation](https://google.github.io/adk-docs/?utm_campaign=deveco_gdemembers&utm_source=deveco)
+- [Google ADK Workflow Agents (`SequentialAgent`, `ParallelAgent`, `LoopAgent`)](https://google.github.io/adk-docs/agents/workflow-agents/?utm_campaign=deveco_gdemembers&utm_source=deveco)
+- [Google ADK Model Context Protocol (`MCPToolset`) Guide](https://google.github.io/adk-docs/tools/mcp-tools/?utm_campaign=deveco_gdemembers&utm_source=deveco)
+- [Google Gemma Open Models Documentation](https://cloud.google.com/vertex-ai/generative-ai/docs/open-models/use-gemma?utm_campaign=deveco_gdemembers&utm_source=deveco)
+- [Google Cloud Run GPU Configuration Guide (`NVIDIA L4`)](https://cloud.google.com/run/docs/configuring/services/gpu?utm_campaign=deveco_gdemembers&utm_source=deveco)
+- [Google Cloud Spanner Graph (`ISO GQL`) Overview](https://cloud.google.com/spanner/docs/graph/overview?utm_campaign=deveco_gdemembers&utm_source=deveco)
+- [Google Cloud AlloyDB AI & `pgvector` `ScaNN` Index Documentation](https://cloud.google.com/alloydb/docs/ai/work-with-embeddings?utm_campaign=deveco_gdemembers&utm_source=deveco)
+- [Google Cloud Codelab Reference: Build and Deploy AI Agents with Gemma 4 and BigQuery MCP in Cloud Run](https://codelabs.developers.google.com/codelabs/cloud-run/cloud-run-adk-bq-mcp?utm_campaign=deveco_gdemembers&utm_source=deveco#0)
 
 ---
 
@@ -571,7 +571,7 @@ The strategy for orchestrating an Agent-to-Agent (A2A) and Multi-MCP Mesh with G
 
   [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/robinamirbahar)
   [![Amazon Book](https://img.shields.io/badge/Amazon-Book%20(2026)-FF9900?style=for-the-badge&logo=amazon&logoColor=white)](https://amazon.com/dp/B0GWCZWCF4)
-  [![Google Developer](https://img.shields.io/badge/Google%20Developer-Profile-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://developers.google.com/profile/u/106918534005910641104)
+  [![Google Developer](https://img.shields.io/badge/Google%20Developer-Profile-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://developers.google.com/profile/u/106918534005910641104?utm_campaign=deveco_gdemembers&utm_source=deveco)
   [![DEV Community](https://img.shields.io/badge/DEV-Articles-0A0A0A?style=for-the-badge&logo=devdotto&logoColor=white)](https://dev.to/robinamirbahar)
   [![Medium](https://img.shields.io/badge/Medium-Blog-12100E?style=for-the-badge&logo=medium&logoColor=white)](https://medium.com/@robinamirbahar)
   [![YouTube](https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/@robinacodesai)
