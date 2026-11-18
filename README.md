@@ -7,7 +7,7 @@
 
 > **Author & Architect:** [Robina Mirbahar](https://github.com/RobinaMirbahar) ([Google Developer Expert in Cloud & AI](https://developers.google.com/profile/u/106918534005910641104?utm_campaign=deveco_gdemembers&utm_source=deveco) · Google Cloud Champion Innovator · Co-Author of [*AI Engineering*](https://www.amazon.com/dp/B0GWCZWCF4))  
 > 📚 **Architecture Track:** Enterprise Agent-to-Agent (A2A) & Multi-MCP Mesh Reference Blueprint on Google Cloud Run  
-> **Focus:** Production Multi-Agent Mesh Combining Google ADK, A2A Protocol, MCP Tool Servers, Gemma 4, Cloud Spanner Graph (GQL) & AlloyDB pgvector
+> **Core Stack:** Open-Weights [Google Gemma 4](https://ai.google.dev/gemma/docs?utm_campaign=deveco_gdemembers&utm_source=deveco), [Google Agent Development Kit (ADK)](https://google.github.io/adk-docs/?utm_campaign=deveco_gdemembers&utm_source=deveco), [Google Cloud Run](https://cloud.google.com/run/docs?utm_campaign=deveco_gdemembers&utm_source=deveco), Cloud Spanner Graph (GQL), AlloyDB (pgvector ScaNN), and MCP.
 
 ---
 
