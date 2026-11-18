@@ -5,7 +5,8 @@
 
 ![Cover](assets/cover.002d0eee.jpg)
 
-> **Author & Architect:** [Robina Mirbahar](https://github.com/RobinaMirbahar) (Google Developer Expert in Cloud & AI)  
+> **Author & Architect:** [Robina Mirbahar](https://github.com/RobinaMirbahar) ([Google Developer Expert in Cloud & AI](https://developers.google.com/profile/u/106918534005910641104?utm_campaign=deveco_gdemembers&utm_source=deveco) · Google Cloud Champion Innovator · Co-Author of [*AI Engineering*](https://www.amazon.com/dp/B0GWCZWCF4))  
+> 📚 **Architecture Track:** Enterprise Agent-to-Agent (A2A) & Multi-MCP Mesh Reference Blueprint on Google Cloud Run  
 > **Focus:** Production Multi-Agent Mesh Combining Google ADK, A2A Protocol, MCP Tool Servers, Gemma 4, Cloud Spanner Graph (GQL) & AlloyDB pgvector
 
 ---
@@ -43,6 +44,19 @@ flowchart TD
     H_A2A <-->|A2A JSON-RPC / SSE| R_Graph & R_Knowledge
     R_Graph <-->|MCP Tool Calls| M_Spanner
     R_Knowledge <-->|MCP Tool Calls| M_Alloy
+    style Orchestrator fill:#fce7f3,stroke:#db2777,stroke-width:2px,color:#831843
+    style Agent fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a
+    style H_ADK fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d
+    style H_A2A fill:#f3e8ff,stroke:#9333ea,stroke-width:2px,color:#581c87
+    style Client fill:#fce7f3,stroke:#db2777,stroke-width:2px,color:#831843
+    style RemoteAgents fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a
+    style Agents fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d
+    style R_Graph fill:#f3e8ff,stroke:#9333ea,stroke-width:2px,color:#581c87
+    style R_Knowledge fill:#fce7f3,stroke:#db2777,stroke-width:2px,color:#831843
+    style MCPServers fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a
+    style Servers fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d
+    style M_Spanner fill:#f3e8ff,stroke:#9333ea,stroke-width:2px,color:#581c87
+    style M_Alloy fill:#fce7f3,stroke:#db2777,stroke-width:2px,color:#831843
 ```
 
 ---
@@ -591,7 +605,3 @@ The strategy for orchestrating an Agent-to-Agent (A2A) and Multi-MCP Mesh with G
 | **[a2a-mcp-mesh-cloudrun](https://github.com/RobinaMirbahar/a2a-mcp-mesh-cloudrun)** | Agent-to-Agent (A2A) & Multi-MCP Mesh on Cloud Run with Gemma 4, Google ADK, Spanner Graph & AlloyDB | ![Stars](https://img.shields.io/github/stars/RobinaMirbahar/a2a-mcp-mesh-cloudrun?style=flat-square&color=EA4335) ![Last Commit](https://img.shields.io/github/last-commit/RobinaMirbahar/a2a-mcp-mesh-cloudrun?style=flat-square) |
 | **[cloudguard-gemma-agent](https://github.com/RobinaMirbahar/cloudguard-gemma-agent)** | 6-Part Production Gemma Enterprise Agent Series (ADK, Cloud Run L4 GPU, Firestore, Model Armor, Vertex AI QLoRA) | ![Stars](https://img.shields.io/github/stars/RobinaMirbahar/cloudguard-gemma-agent?style=flat-square&color=4285F4) ![Last Commit](https://img.shields.io/github/last-commit/RobinaMirbahar/cloudguard-gemma-agent?style=flat-square) |
 | **[cozy-ai-agent-cafe-game](https://github.com/RobinaMirbahar/cozy-ai-agent-cafe-game)** | Prompt Paws: 60 FPS Cozy AI Agent Bakery Simulation Game teaching RAG, Guardrails, Context Caching & Multi-Agent Loops | ![Stars](https://img.shields.io/github/stars/RobinaMirbahar/cozy-ai-agent-cafe-game?style=flat-square&color=7928CA) ![Last Commit](https://img.shields.io/github/last-commit/RobinaMirbahar/cozy-ai-agent-cafe-game?style=flat-square) |
-
-<div align="center">
-  <img src="https://raw.githubusercontent.com/RobinaMirbahar/RobinaMirbahar/main/ProfileImages/GithubBanner.svg" alt="Robina Mirbahar Banner" width="100%" />
-</div>
