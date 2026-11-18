@@ -44,19 +44,6 @@ flowchart TD
     H_A2A <-->|A2A JSON-RPC / SSE| R_Graph & R_Knowledge
     R_Graph <-->|MCP Tool Calls| M_Spanner
     R_Knowledge <-->|MCP Tool Calls| M_Alloy
-    style Orchestrator fill:#fce7f3,stroke:#db2777,stroke-width:2px,color:#831843
-    style Agent fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a
-    style H_ADK fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d
-    style H_A2A fill:#f3e8ff,stroke:#9333ea,stroke-width:2px,color:#581c87
-    style Client fill:#fce7f3,stroke:#db2777,stroke-width:2px,color:#831843
-    style RemoteAgents fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a
-    style Agents fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d
-    style R_Graph fill:#f3e8ff,stroke:#9333ea,stroke-width:2px,color:#581c87
-    style R_Knowledge fill:#fce7f3,stroke:#db2777,stroke-width:2px,color:#831843
-    style MCPServers fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a8a
-    style Servers fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d
-    style M_Spanner fill:#f3e8ff,stroke:#9333ea,stroke-width:2px,color:#581c87
-    style M_Alloy fill:#fce7f3,stroke:#db2777,stroke-width:2px,color:#831843
 ```
 
 ---
